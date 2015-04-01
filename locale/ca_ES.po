@@ -1,0 +1,107 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:purchase.line,discount:"
+msgid "Discount"
+msgstr "Descompte"
+
+msgctxt "field:purchase.line,gross_unit_price:"
+msgid "Gross Price"
+msgstr "Preu brut"
+
+msgctxt "field:purchase.line,gross_unit_price_wo_round:"
+msgid "Gross Price without rounding"
+msgstr "Preu brut sense arrodonir"
+
+msgctxt "model:ir.action,name:report_purchase"
+msgid "Purchase"
+msgstr "Venda"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "%"
+msgstr "%"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Amount"
+msgstr "Import"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Date:"
+msgstr "Data:"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Description"
+msgstr "Descripció"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Description:"
+msgstr "Descripció:"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Discount"
+msgstr "Descompte"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Draft"
+msgstr "Esborrany"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "E-Mail:"
+msgstr "Email:"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Order"
+msgstr "Comanda"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Order N°:"
+msgstr "Comanda Nº:"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Phone:"
+msgstr "Telèfon:"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Purchase"
+msgstr "Venda"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Quantity"
+msgstr "Quantitat"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Quotation N°:"
+msgstr "Pressupost Nº:"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Taxes"
+msgstr "Impostos"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Taxes:"
+msgstr "Impostos:"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Total (excl. taxes):"
+msgstr "Total (sense impostos):"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Total:"
+msgstr "Total:"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "Unit Price"
+msgstr "Preu unitat"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "VAT Number:"
+msgstr "NIF:"
+
+msgctxt "odt:purchase.purchase.discount:"
+msgid "VAT:"
+msgstr "IVA:"
+
+msgctxt "view:purchase.line:"
+msgid "%"
+msgstr "%"
