@@ -7,7 +7,7 @@ import os
 import ConfigParser
 
 MODULE = 'purchase_discount'
-PREFIX = 'trytonzz'
+PREFIX = 'trytonspain'
 MODULE2PREFIX = {}
 
 
