@@ -1,15 +1,12 @@
 # This file is part of purchase_discount module for Tryton.
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
-
 from decimal import Decimal
 from trytond.model import fields
 from trytond.pool import PoolMeta
 from trytond.pyson import Eval
 from trytond.modules.purchase.purchase import PurchaseReport
-from trytond.config import config
-DIGITS = int(config.get('digits', 'unit_price_digits', 4))
-DISCOUNT_DIGITS = int(config.get('digits', 'discount_digits', 4))
+from trytond.config import config as config_
 
 __all__ = ['PurchaseLine', 'PurchaseReport']
 __metaclass__ = PoolMeta
@@ -18,6 +15,8 @@ STATES = {
     'invisible': Eval('type') != 'line',
     'required': Eval('type') == 'line',
     }
+DIGITS = config_.getint('product', 'price_decimal', default=4)
+DISCOUNT_DIGITS = config_.getint('product', 'discount_decimal', default=4)
 
 
 class PurchaseLine:
