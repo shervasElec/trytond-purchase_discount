@@ -62,11 +62,10 @@ class PurchaseLine:
             digits = self.__class__.gross_unit_price.digits[1]
             gross_unit_price = gross_unit_price_wo_round.quantize(
                 Decimal(str(10.0 ** -digits)))
-        return {
-            'gross_unit_price': gross_unit_price,
-            'gross_unit_price_wo_round': gross_unit_price_wo_round,
-            'unit_price': unit_price,
-            }
+
+        self.gross_unit_price = gross_unit_price
+        self.gross_unit_price_wo_round = gross_unit_price_wo_round
+        self.unit_price = unit_price
 
     @fields.depends('gross_unit_price', 'discount')
     def on_change_gross_unit_price(self):
@@ -77,21 +76,20 @@ class PurchaseLine:
         return self.update_prices()
 
     def on_change_product(self):
-        res = super(PurchaseLine, self).on_change_product()
-        if 'unit_price' in res:
-            self.gross_unit_price = res['unit_price']
-            self.discount = Decimal(0)
-            res.update(self.update_prices())
-        if 'discount' not in res:
-            res['discount'] = Decimal(0)
-        return res
+        super(PurchaseLine, self).on_change_product()
+        self.gross_unit_price = self.unit_price
+        self.discount = Decimal(0)
+
+        if self.unit_price:
+            self.update_prices()
 
     def on_change_quantity(self):
-        res = super(PurchaseLine, self).on_change_quantity()
-        if 'unit_price' in res:
-            self.gross_unit_price = res['unit_price']
-            res.update(self.update_prices())
-        return res
+        super(PurchaseLine, self).on_change_quantity()
+        self.gross_unit_price = self.unit_price
+        self.discount = Decimal(0)
+
+        if self.unit_price:
+            self.update_prices()
 
     def get_invoice_line(self, invoice_type):
         lines = super(PurchaseLine, self).get_invoice_line(invoice_type)
