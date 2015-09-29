@@ -22,7 +22,6 @@ copyright notices and license terms. -->
             <field name="model">purchase.purchase</field>
             <field name="report_name">purchase.purchase.discount</field>
             <field name="report">purchase_discount/purchase.odt</field>
-            <field name="style">company/header_A4.odt</field>
         </record>
         <record model="ir.action.keyword" id="purchase.report_purchase_keyword">
             <field name="action" ref="report_purchase"/>
