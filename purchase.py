@@ -8,7 +8,7 @@ from trytond.pyson import Eval
 from trytond.modules.purchase.purchase import PurchaseReport
 from trytond.config import config as config_
 
-__all__ = ['PurchaseLine', 'PurchaseReport']
+__all__ = ['PurchaseLine', 'PurchaseDiscountReport']
 __metaclass__ = PoolMeta
 
 STATES = {
@@ -117,5 +117,5 @@ class PurchaseLine:
         return super(PurchaseLine, cls).create(vlist)
 
 
-class PurchaseReport(PurchaseReport):
+class PurchaseDiscountReport(PurchaseReport):
     __name__ = 'purchase.purchase.discount'
