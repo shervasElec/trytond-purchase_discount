@@ -5,13 +5,13 @@ from trytond.pool import PoolMeta
 from trytond.config import config as config_
 
 __all__ = ['Move']
-__metaclass__ = PoolMeta
 
 DIGITS = config_.getint('product', 'price_decimal', default=4)
 DISCOUNT_DIGITS = config_.getint('product', 'discount_decimal', default=4)
 
 
 class Move:
+    __metaclass__ = PoolMeta
     __name__ = 'stock.move'
 
     @classmethod

@@ -9,7 +9,6 @@ from trytond.modules.purchase.purchase import PurchaseReport
 from trytond.config import config as config_
 
 __all__ = ['PurchaseLine', 'PurchaseDiscountReport']
-__metaclass__ = PoolMeta
 
 STATES = {
     'invisible': Eval('type') != 'line',
@@ -20,6 +19,7 @@ DISCOUNT_DIGITS = config_.getint('product', 'discount_decimal', default=4)
 
 
 class PurchaseLine:
+    __metaclass__ = PoolMeta
     __name__ = 'purchase.line'
 
     gross_unit_price = fields.Numeric('Gross Price', digits=(16, DIGITS),
