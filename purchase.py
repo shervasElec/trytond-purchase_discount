@@ -91,8 +91,8 @@ class PurchaseLine:
         if self.unit_price:
             self.update_prices()
 
-    def get_invoice_line(self, invoice_type):
-        lines = super(PurchaseLine, self).get_invoice_line(invoice_type)
+    def get_invoice_line(self):
+        lines = super(PurchaseLine, self).get_invoice_line()
         for line in lines:
             line.gross_unit_price = self.gross_unit_price
             line.discount = self.discount
