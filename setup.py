@@ -8,7 +8,9 @@ import ConfigParser
 
 MODULE = 'purchase_discount'
 PREFIX = 'trytonspain'
-MODULE2PREFIX = {}
+MODULE2PREFIX = {
+    'account_invoice_discount': 'trytonspain',
+    }
 
 
 def read(fname):
