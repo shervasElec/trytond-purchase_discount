@@ -75,7 +75,7 @@ class PurchaseLine:
     def on_change_discount(self):
         return self.update_prices()
 
-    @fields.depends('unit_price')
+    @fields.depends('unit_price', 'discount')
     def on_change_product(self):
         super(PurchaseLine, self).on_change_product()
         self.gross_unit_price = self.unit_price
@@ -84,7 +84,7 @@ class PurchaseLine:
         if self.unit_price:
             self.update_prices()
 
-    @fields.depends('unit_price')
+    @fields.depends('unit_price', 'discount')
     def on_change_quantity(self):
         super(PurchaseLine, self).on_change_quantity()
         self.gross_unit_price = self.unit_price
