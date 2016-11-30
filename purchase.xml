@@ -25,6 +25,8 @@ copyright notices and license terms. -->
             <field name="style">company/header_A4.odt</field>
         </record>
         <record model="ir.action.keyword" id="purchase.report_purchase_keyword">
+            <field name="keyword">form_print</field>
+            <field name="model">purchase.purchase,-1</field>
             <field name="action" ref="report_purchase"/>
         </record>
     </data>
