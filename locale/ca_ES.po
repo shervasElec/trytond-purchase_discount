@@ -16,7 +16,7 @@ msgstr "Preu brut sense arrodonir"
 
 msgctxt "model:ir.action,name:report_purchase"
 msgid "Purchase"
-msgstr "Venda"
+msgstr "Compra"
 
 msgctxt "odt:purchase.purchase.discount:"
 msgid "%"
@@ -64,7 +64,7 @@ msgstr "Telèfon:"
 
 msgctxt "odt:purchase.purchase.discount:"
 msgid "Purchase"
-msgstr "Venda"
+msgstr "Compra"
 
 msgctxt "odt:purchase.purchase.discount:"
 msgid "Quantity"
