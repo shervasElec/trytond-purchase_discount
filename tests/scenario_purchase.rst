@@ -63,6 +63,16 @@ Create account user::
     >>> account_user.groups.append(account_group)
     >>> account_user.save()
 
+Create product_admin user::
+
+    >>> product_admin_user = User()
+    >>> product_admin_user.name = 'product_admin'
+    >>> product_admin_user.login = 'product_admin'
+    >>> product_admin_user.main_company = company
+    >>> product_admin_group, = Group.find([('name', '=', 'Product Administration')])
+    >>> product_admin_user.groups.append(product_admin_group)
+    >>> product_admin_user.save()
+
 Create fiscal year::
 
     >>> fiscalyear = set_fiscalyear_invoice_sequences(
@@ -214,3 +224,30 @@ Check invoice discounts::
     Decimal('0')
     >>> invoice_line_wo_discount.amount
     Decimal('15.00')
+
+Create supplier price with discount::
+
+    >>> config.user = product_admin_user.id
+    >>> Supplier = Model.get('purchase.product_supplier')
+    >>> product_supplier = Supplier()
+    >>> product_supplier.product = template
+    >>> product_supplier.party = supplier
+    >>> product_supplier.currency =  company.currency
+    >>> price = product_supplier.prices.new()
+    >>> price.quantity = 10.0
+    >>> price.discount = Decimal('0.10')
+    >>> price.unit_price = Decimal('10')
+    >>> product_supplier.save()
+
+Test discount is applied on purchase line::
+
+    >>> config.user = purchase_user.id
+    >>> purchase_line = purchase.lines.new()
+    >>> purchase.party = supplier
+    >>> purchase_line.product = product
+    >>> purchase_line.quantity = 5.0
+    >>> purchase_line.discount
+    Decimal('0')
+    >>> purchase_line.quantity = 10.0
+    >>> purchase_line.discount
+    Decimal('0.10')

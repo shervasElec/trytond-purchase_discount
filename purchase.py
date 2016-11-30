@@ -3,9 +3,10 @@
 # the full copyright notices and license terms.
 from decimal import Decimal
 from trytond.model import fields
-from trytond.pool import PoolMeta
+from trytond.pool import PoolMeta, Pool
 from trytond.pyson import Eval
 from trytond.modules.purchase.purchase import PurchaseReport
+from trytond.transaction import Transaction
 from trytond.config import config as config_
 
 __all__ = ['PurchaseLine', 'PurchaseDiscountReport']
@@ -75,7 +76,17 @@ class PurchaseLine:
     def on_change_discount(self):
         return self.update_prices()
 
-    @fields.depends('unit_price', 'discount')
+    def get_purchase_discount(self):
+        pool = Pool()
+        Product = pool.get('product.product')
+        if not self.product:
+            return
+
+        with Transaction().set_context(self._get_context_purchase_price()):
+            return Product.get_purchase_discount([self.product],
+                abs(self.quantity or 0))[self.product.id]
+
+    @fields.depends('unit_price', 'discount', 'product', 'quantity')
     def on_change_product(self):
         super(PurchaseLine, self).on_change_product()
         self.gross_unit_price = self.unit_price
@@ -84,14 +95,18 @@ class PurchaseLine:
         if self.unit_price:
             self.update_prices()
 
-    @fields.depends('unit_price', 'discount')
+        self.discount = self.get_purchase_discount()
+
+    @fields.depends('unit_price', 'discount', 'product', 'quantity', 'unit')
     def on_change_quantity(self):
         super(PurchaseLine, self).on_change_quantity()
+
         self.gross_unit_price = self.unit_price
         self.discount = Decimal(0)
-
         if self.unit_price:
             self.update_prices()
+
+        self.discount = self.get_purchase_discount()
 
     def get_invoice_line(self):
         lines = super(PurchaseLine, self).get_invoice_line()
