@@ -16,3 +16,6 @@ def register():
     Pool.register(
         PurchaseDiscountReport,
         module='purchase_discount', type_='report')
+    Pool.register(
+        CreatePurchase,
+        module='purchase_discount', type_='wizard')

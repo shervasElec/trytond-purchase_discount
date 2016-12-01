@@ -9,7 +9,7 @@ from trytond.modules.purchase.purchase import PurchaseReport
 from trytond.transaction import Transaction
 from trytond.config import config as config_
 
-__all__ = ['PurchaseLine', 'PurchaseDiscountReport']
+__all__ = ['PurchaseLine', 'PurchaseDiscountReport', 'CreatePurchase']
 
 STATES = {
     'invisible': Eval('type') != 'line',
@@ -132,3 +132,24 @@ class PurchaseLine:
 
 class PurchaseDiscountReport(PurchaseReport):
     __name__ = 'purchase.purchase.discount'
+
+
+class CreatePurchase:
+    __metaclass__ = PoolMeta
+    __name__ = 'purchase.request.create_purchase'
+
+    @classmethod
+    def compute_purchase_line(cls, key, requests, purchase):
+        pool = Pool()
+        Product = pool.get('product.product')
+        line = super(CreatePurchase, cls).compute_purchase_line(
+            key, requests, purchase)
+        if line:
+            line.gross_unit_price = line.unit_price
+            with Transaction().set_context(uom=line.unit.id,
+                    supplier=purchase.party.id,
+                    currency=purchase.currency.id):
+                line.discount = Product.get_purchase_discount(
+                    [line.product], line.quantity)[line.product.id]
+            line.update_prices()
+        return line
