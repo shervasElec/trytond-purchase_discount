@@ -234,6 +234,9 @@ Create supplier price with discount::
     >>> product_supplier.party = supplier
     >>> product_supplier.currency =  company.currency
     >>> price = product_supplier.prices.new()
+    >>> price.quantity = 0.0
+    >>> price.unit_price = Decimal('10')
+    >>> price = product_supplier.prices.new()
     >>> price.quantity = 10.0
     >>> price.discount = Decimal('0.10')
     >>> price.unit_price = Decimal('10')
@@ -248,6 +251,14 @@ Test discount is applied on purchase line::
     >>> purchase_line.quantity = 5.0
     >>> purchase_line.discount
     Decimal('0')
+    >>> purchase_line.gross_unit_price
+    Decimal('10.0000')
+    >>> purchase_line.unit_price
+    Decimal('10.00000000')
     >>> purchase_line.quantity = 10.0
     >>> purchase_line.discount
     Decimal('0.10')
+    >>> purchase_line.gross_unit_price
+    Decimal('10.0000')
+    >>> purchase_line.unit_price
+    Decimal('9.00000000')

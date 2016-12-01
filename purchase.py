@@ -90,23 +90,19 @@ class PurchaseLine:
     def on_change_product(self):
         super(PurchaseLine, self).on_change_product()
         self.gross_unit_price = self.unit_price
-        self.discount = Decimal(0)
+        self.discount = self.get_purchase_discount()
 
         if self.unit_price:
             self.update_prices()
-
-        self.discount = self.get_purchase_discount()
 
     @fields.depends('unit_price', 'discount', 'product', 'quantity', 'unit')
     def on_change_quantity(self):
         super(PurchaseLine, self).on_change_quantity()
 
         self.gross_unit_price = self.unit_price
-        self.discount = Decimal(0)
+        self.discount = self.get_purchase_discount()
         if self.unit_price:
             self.update_prices()
-
-        self.discount = self.get_purchase_discount()
 
     def get_invoice_line(self):
         lines = super(PurchaseLine, self).get_invoice_line()
