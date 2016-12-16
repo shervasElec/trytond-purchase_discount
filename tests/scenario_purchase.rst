@@ -166,6 +166,7 @@ Purchase 5 products testing several on_change calls and avoiding division by zer
     >>> purchase_line.amount
     Decimal('0.00')
     >>> purchase_line.discount = Decimal('0.12')
+    >>> purchase_line.gross_unit_price = Decimal('5')
     >>> purchase_line.amount
     Decimal('4.40')
     >>> purchase_line.quantity = 2.0
@@ -235,11 +236,15 @@ Create supplier price with discount::
     >>> product_supplier.currency =  company.currency
     >>> price = product_supplier.prices.new()
     >>> price.quantity = 0.0
-    >>> price.unit_price = Decimal('10')
+    >>> price.gross_unit_price = Decimal('10')
+    >>> price.unit_price
+    Decimal('10.00000000')
     >>> price = product_supplier.prices.new()
     >>> price.quantity = 10.0
     >>> price.discount = Decimal('0.10')
-    >>> price.unit_price = Decimal('10')
+    >>> price.gross_unit_price = Decimal('10')
+    >>> price.unit_price
+    Decimal('9.00000000')
     >>> product_supplier.save()
 
 Test discount is applied on purchase line::
@@ -262,3 +267,44 @@ Test discount is applied on purchase line::
     Decimal('10.0000')
     >>> purchase_line.unit_price
     Decimal('9.00000000')
+
+Test that the value is correct when the product is changed::
+
+    >>> purchase = Purchase()
+    >>> purchase.party = customer
+    >>> purchase_line = purchase.lines.new()
+    >>> purchase_line.product = product
+    >>> purchase_line.quantity = 1.0
+    >>> purchase_line.discount
+    Decimal('0')
+    >>> purchase_line.gross_unit_price
+    Decimal('5.0000')
+    >>> purchase_line.unit_price
+    Decimal('5.00000000')
+    >>> purchase_line.amount
+    Decimal('5.00')
+    >>> purchase_line.discount = Decimal('0.12')
+    >>> purchase_line.gross_unit_price
+    Decimal('5.0000')
+    >>> purchase_line.unit_price
+    Decimal('4.40000000')
+    >>> purchase_line.amount
+    Decimal('4.40')
+    >>> purchase_line.product = None
+    >>> purchase_line.discount
+    Decimal('0.12')
+    >>> purchase_line.gross_unit_price
+    Decimal('5.0000')
+    >>> purchase_line.unit_price
+    Decimal('4.40000000')
+    >>> purchase_line.amount
+    Decimal('4.40')
+    >>> purchase_line.product = product
+    >>> purchase_line.discount
+    Decimal('0')
+    >>> purchase_line.gross_unit_price
+    Decimal('5.0000')
+    >>> purchase_line.unit_price
+    Decimal('5.00000000')
+    >>> purchase_line.amount
+    Decimal('5.00')

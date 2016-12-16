@@ -2,10 +2,10 @@
 # this repository contains the full copyright notices and license terms.
 from decimal import Decimal
 
-from trytond.model import ModelView, ModelSQL, fields
 from trytond.pool import PoolMeta, Pool
 from trytond.config import config
 from trytond.transaction import Transaction
+from trytond.modules.account_invoice_discount.invoice import DiscountMixin
 
 
 __all__ = ['Product', 'ProductSupplierPrice']
@@ -13,10 +13,13 @@ __all__ = ['Product', 'ProductSupplierPrice']
 DISCOUNT_DIGITS = config.getint('product', 'discount_decimal', default=4)
 
 
-class ProductSupplierPrice(ModelSQL, ModelView):
-    'Product Supplier'
+class ProductSupplierPrice(DiscountMixin):
+    __metaclass__ = PoolMeta
     __name__ = 'purchase.product_supplier.price'
-    discount = fields.Numeric('Discount', digits=(16, DISCOUNT_DIGITS))
+
+    @classmethod
+    def default_unit_price(cls):
+        return Decimal(0)
 
 
 class Product:

@@ -2,7 +2,9 @@
 <!-- The COPYRIGHT file at the top level of this repository contains the full
      copyright notices and license terms. -->
 <data>
-    <xpath expr="/form/field[@name='unit_price']" position="after">
+    <xpath expr="/form/field[@name='quantity']" position="after">
+        <label name="gross_unit_price"/>
+        <field name="gross_unit_price"/>
         <label name="discount"/>
         <group col="2" id="percentage">
             <field name="discount" factor="100" xexpand="0"/>
