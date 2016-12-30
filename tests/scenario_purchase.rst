@@ -63,16 +63,6 @@ Create account user::
     >>> account_user.groups.append(account_group)
     >>> account_user.save()
 
-Create product_admin user::
-
-    >>> product_admin_user = User()
-    >>> product_admin_user.name = 'product_admin'
-    >>> product_admin_user.login = 'product_admin'
-    >>> product_admin_user.main_company = company
-    >>> product_admin_group, = Group.find([('name', '=', 'Product Administration')])
-    >>> product_admin_user.groups.append(product_admin_group)
-    >>> product_admin_user.save()
-
 Create fiscal year::
 
     >>> fiscalyear = set_fiscalyear_invoice_sequences(
@@ -166,7 +156,6 @@ Purchase 5 products testing several on_change calls and avoiding division by zer
     >>> purchase_line.amount
     Decimal('0.00')
     >>> purchase_line.discount = Decimal('0.12')
-    >>> purchase_line.gross_unit_price = Decimal('5')
     >>> purchase_line.amount
     Decimal('4.40')
     >>> purchase_line.quantity = 2.0
@@ -225,86 +214,3 @@ Check invoice discounts::
     Decimal('0')
     >>> invoice_line_wo_discount.amount
     Decimal('15.00')
-
-Create supplier price with discount::
-
-    >>> config.user = product_admin_user.id
-    >>> Supplier = Model.get('purchase.product_supplier')
-    >>> product_supplier = Supplier()
-    >>> product_supplier.product = template
-    >>> product_supplier.party = supplier
-    >>> product_supplier.currency =  company.currency
-    >>> price = product_supplier.prices.new()
-    >>> price.quantity = 0.0
-    >>> price.gross_unit_price = Decimal('10')
-    >>> price.unit_price
-    Decimal('10.00000000')
-    >>> price = product_supplier.prices.new()
-    >>> price.quantity = 10.0
-    >>> price.discount = Decimal('0.10')
-    >>> price.gross_unit_price = Decimal('10')
-    >>> price.unit_price
-    Decimal('9.00000000')
-    >>> product_supplier.save()
-
-Test discount is applied on purchase line::
-
-    >>> config.user = purchase_user.id
-    >>> purchase_line = purchase.lines.new()
-    >>> purchase.party = supplier
-    >>> purchase_line.product = product
-    >>> purchase_line.quantity = 5.0
-    >>> purchase_line.discount
-    Decimal('0')
-    >>> purchase_line.gross_unit_price
-    Decimal('10.0000')
-    >>> purchase_line.unit_price
-    Decimal('10.00000000')
-    >>> purchase_line.quantity = 10.0
-    >>> purchase_line.discount
-    Decimal('0.10')
-    >>> purchase_line.gross_unit_price
-    Decimal('10.0000')
-    >>> purchase_line.unit_price
-    Decimal('9.00000000')
-
-Test that the value is correct when the product is changed::
-
-    >>> purchase = Purchase()
-    >>> purchase.party = customer
-    >>> purchase_line = purchase.lines.new()
-    >>> purchase_line.product = product
-    >>> purchase_line.quantity = 1.0
-    >>> purchase_line.discount
-    Decimal('0')
-    >>> purchase_line.gross_unit_price
-    Decimal('5.0000')
-    >>> purchase_line.unit_price
-    Decimal('5.00000000')
-    >>> purchase_line.amount
-    Decimal('5.00')
-    >>> purchase_line.discount = Decimal('0.12')
-    >>> purchase_line.gross_unit_price
-    Decimal('5.0000')
-    >>> purchase_line.unit_price
-    Decimal('4.40000000')
-    >>> purchase_line.amount
-    Decimal('4.40')
-    >>> purchase_line.product = None
-    >>> purchase_line.discount
-    Decimal('0.12')
-    >>> purchase_line.gross_unit_price
-    Decimal('5.0000')
-    >>> purchase_line.unit_price
-    Decimal('4.40000000')
-    >>> purchase_line.amount
-    Decimal('4.40')
-    >>> purchase_line.product = product
-    >>> purchase_line.discount
-    Decimal('0')
-    >>> purchase_line.gross_unit_price
-    Decimal('5.0000')
-    >>> purchase_line.unit_price
-    Decimal('5.00000000')
-    >>> purchase_line.amount
-    Decimal('5.00')

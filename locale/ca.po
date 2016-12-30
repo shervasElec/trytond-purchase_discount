@@ -1,4 +1,4 @@
-#
+# 
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
@@ -10,22 +10,98 @@ msgctxt "field:purchase.line,gross_unit_price:"
 msgid "Gross Price"
 msgstr "Preu brut"
 
-msgctxt "field:purchase.product_supplier.price,discount:"
-msgid "Discount"
-msgstr "Descompte"
-
-msgctxt "field:purchase.product_supplier.price,gross_unit_price:"
-msgid "Gross Price"
-msgstr "Preu brut"
+msgctxt "field:purchase.line,gross_unit_price_wo_round:"
+msgid "Gross Price without rounding"
+msgstr "Preu brut sense arrodonir"
 
 msgctxt "model:ir.action,name:report_purchase"
 msgid "Purchase"
 msgstr "Compra"
 
-msgctxt "view:purchase.line:"
+msgctxt "report:purchase.purchase.discount:"
 msgid "%"
 msgstr "%"
 
-msgctxt "view:purchase.product_supplier.price:"
+msgctxt "report:purchase.purchase.discount:"
+msgid "Amount"
+msgstr "Import"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Date:"
+msgstr "Data:"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Description"
+msgstr "Descripció"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Description:"
+msgstr "Descripció:"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Discount"
+msgstr "Descompte"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Draft"
+msgstr "Esborrany"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "E-Mail:"
+msgstr "Email:"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Order"
+msgstr "Comanda"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Order N°:"
+msgstr "Comanda Nº:"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Phone:"
+msgstr "Telèfon:"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Purchase"
+msgstr "Compra"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Quantity"
+msgstr "Quantitat"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Quotation N°:"
+msgstr "Pressupost Nº:"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Taxes"
+msgstr "Impostos"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Taxes:"
+msgstr "Impostos:"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Total (excl. taxes):"
+msgstr "Total (sense impostos):"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Total:"
+msgstr "Total:"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "Unit Price"
+msgstr "Preu unitat"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "VAT Number:"
+msgstr "NIF:"
+
+msgctxt "report:purchase.purchase.discount:"
+msgid "VAT:"
+msgstr "IVA:"
+
+msgctxt "view:purchase.line:"
 msgid "%"
 msgstr "%"
