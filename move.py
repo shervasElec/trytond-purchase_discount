@@ -21,3 +21,5 @@ class Move:
         # Compatibility with purchase_shipment_cost
         if hasattr(cls, 'unit_shipment_cost'):
             cls.unit_shipment_cost.digits = cls.unit_price.digits
+        if hasattr(cls, 'unit_landed_cost'):
+            cls.unit_landed_cost.digits = cls.unit_price.digits
