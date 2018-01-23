@@ -14,7 +14,9 @@ except ImportError:
 
 MODULE = 'purchase_discount'
 PREFIX = 'trytonspain'
-MODULE2PREFIX = {}
+MODULE2PREFIX = {
+    'account_invoice_discount': 'trytonspain',
+    }
 
 
 def read(fname):
@@ -51,7 +53,19 @@ for dep in info.get('depends', []):
 requires.append(get_require_version('trytond'))
 
 tests_require = [get_require_version('proteus')]
-dependency_links = []
+series = '%s.%s' % (major_version, minor_version)
+if minor_version % 2:
+    branch = 'default'
+else:
+    branch = series
+dependency_links = [
+    ('hg+https://bitbucket.org/trytonspain/'
+        'trytond-account_invoice_discount@%(branch)s'
+        '#egg=trytonspain-account_invoice_discount-%(series)s' % {
+            'branch': branch,
+            'series': series,
+            }),
+    ]
 if minor_version % 2:
     # Add development index for testing with proteus
     dependency_links.append('https://trydevpi.tryton.org/')
@@ -118,6 +132,6 @@ setup(name='%s_%s' % (PREFIX, MODULE),
     tests_require=tests_require,
     use_2to3=True,
     convert_2to3_doctests=[
-        'tests/scenario_purchase_discount.rst',
+        'tests/scenario_purchase.rst',
         ],
     )
