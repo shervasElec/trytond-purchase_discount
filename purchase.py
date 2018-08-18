@@ -18,8 +18,7 @@ DIGITS = config_.getint('product', 'price_decimal', default=4)
 DISCOUNT_DIGITS = config_.getint('product', 'discount_decimal', default=4)
 
 
-class PurchaseLine:
-    __metaclass__ = PoolMeta
+class PurchaseLine(metaclass=PoolMeta):
     __name__ = 'purchase.line'
 
     gross_unit_price = fields.Numeric('Gross Price', digits=(16, DIGITS),

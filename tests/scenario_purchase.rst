@@ -139,7 +139,7 @@ Create an Inventory::
     >>> inventory_line.save()
     >>> Inventory.confirm([inventory.id], config.context)
     >>> inventory.state
-    u'done'
+    'done'
 
 Purchase 5 products testing several on_change calls and avoiding division by zero::
 
@@ -188,7 +188,7 @@ Process purchase::
     >>> purchase.click('confirm')
     >>> purchase.click('process')
     >>> purchase.state
-    u'processing'
+    'processing'
     >>> purchase.reload()
     >>> invoice, = purchase.invoices
     >>> invoice.origins == purchase.rec_name
