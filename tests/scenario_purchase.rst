@@ -186,7 +186,6 @@ Process purchase::
 
     >>> purchase.click('quote')
     >>> purchase.click('confirm')
-    >>> purchase.click('process')
     >>> purchase.state
     'processing'
     >>> purchase.reload()
