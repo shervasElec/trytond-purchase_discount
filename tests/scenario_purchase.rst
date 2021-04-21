@@ -147,36 +147,41 @@ Purchase 5 products testing several on_change calls and avoiding division by zer
     >>> purchase.invoice_method = 'order'
     >>> purchase_line = purchase.lines.new()
     >>> purchase_line.product = product
+    >>> purchase_line.gross_unit_price == Decimal('5.0000')
+    True
+    >>> purchase_line.unit_price == Decimal('5.00000000')
+    True
     >>> purchase_line.quantity = 1.0
     >>> purchase_line.discount = Decimal('1')
-    >>> purchase_line.amount
-    Decimal('0.00')
+    >>> purchase_line.unit_price == Decimal('0.00')
+    True
     >>> purchase_line.discount = Decimal('0.12')
-    >>> purchase_line.amount
-    Decimal('4.40')
+    >>> purchase_line.unit_price == Decimal('4.40')
+    True
+    >>> purchase_line.unit = product.purchase_uom
     >>> purchase_line.quantity = 2.0
-    >>> purchase_line.amount
-    Decimal('10.00')
-    >>> purchase_line.discount = Decimal('0.12')
-    >>> purchase_line.amount
-    Decimal('8.80')
+    >>> purchase_line.unit_price == Decimal('4.40')
+    True
     >>> purchase_line = purchase.lines.new()
     >>> purchase_line.type = 'comment'
     >>> purchase_line.description = 'Comment'
     >>> purchase_line = purchase.lines.new()
     >>> purchase_line.product = product
     >>> purchase_line.quantity = 3.0
-    >>> purchase_line.amount
-    Decimal('15.00')
-    >>> purchase.untaxed_amount
-    Decimal('23.80')
+    >>> purchase_line.unit_price == Decimal('5.00000000')
+    True
     >>> purchase.save()
-    >>> purchase_line_w_discount = purchase.lines[0]
-    >>> purchase_line_w_discount.amount
-    Decimal('8.80')
-    >>> purchase_line_wo_discount = purchase.lines[2]
-    >>> purchase_line_wo_discount.amount
-    Decimal('15.00')
+    >>> line1, line2, line3 = purchase.lines
+    >>> line1.amount == Decimal('8.80')
+    True
+    >>> line1.discount == Decimal('0.12')
+    True
+    >>> line2.amount == Decimal('0.00')
+    True
+    >>> line3.amount == Decimal('15.00')
+    True
+    >>> line3.discount == Decimal('0.00')
+    True
 
 Process purchase::
 
@@ -193,19 +198,20 @@ Process purchase::
 
 Check invoice discounts::
 
-    >>> purchase_line_w_discount.reload()
-    >>> invoice_line_w_discount, = purchase_line_w_discount.invoice_lines
-    >>> invoice_line_w_discount.gross_unit_price
-    Decimal('5.0000')
-    >>> invoice_line_w_discount.discount
-    Decimal('0.12')
-    >>> invoice_line_w_discount.amount
-    Decimal('8.80')
-    >>> purchase_line_wo_discount.reload()
-    >>> invoice_line_wo_discount, = purchase_line_wo_discount.invoice_lines
-    >>> invoice_line_wo_discount.gross_unit_price
-    Decimal('5.0000')
-    >>> invoice_line_wo_discount.discount
-    Decimal('0')
-    >>> invoice_line_wo_discount.amount
-    Decimal('15.00')
+    >>> line1, line2, line3 = invoice.lines
+    >>> line1.gross_unit_price == Decimal('5.0000')
+    True
+    >>> line1.discount == Decimal('0.12')
+    True
+    >>> line1.amount == Decimal('8.80')
+    True
+    >>> line2.gross_unit_price == None
+    True
+    >>> line2.discount == Decimal('0.00')
+    True
+    >>> line3.gross_unit_price == Decimal('5.0000')
+    True
+    >>> line3.discount == Decimal('0.00')
+    True
+    >>> line3.amount == Decimal('15.00')
+    True
