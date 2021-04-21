@@ -1,4 +1,4 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
@@ -17,90 +17,6 @@ msgstr "Precio bruto sin redondeo"
 msgctxt "model:ir.action,name:report_purchase"
 msgid "Purchase"
 msgstr "Compra"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "%"
-msgstr "%"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Amount"
-msgstr "Importe"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Date:"
-msgstr "Fecha:"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Description"
-msgstr "Descripción"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Description:"
-msgstr "Descripción:"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Discount"
-msgstr "Descuento"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Draft"
-msgstr "Borrador"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "E-Mail:"
-msgstr "Correo electrónico:"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Order"
-msgstr "Pedido"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Order N°:"
-msgstr "Nº pedido:"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Phone:"
-msgstr "Teléfono:"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Purchase"
-msgstr "Compra"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Quantity"
-msgstr "Cantidad"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Quotation N°:"
-msgstr "Presupuesto Nº:"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Taxes"
-msgstr "Impuestos"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Taxes:"
-msgstr "Impuestos:"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Total (excl. taxes):"
-msgstr "Total (sin impuestos):"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Total:"
-msgstr "Total:"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "Unit Price"
-msgstr "Precio unidad"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "VAT Number:"
-msgstr "NIF:"
-
-msgctxt "report:purchase.purchase.discount:"
-msgid "VAT:"
-msgstr "IVA:"
 
 msgctxt "view:purchase.line:"
 msgid "%"

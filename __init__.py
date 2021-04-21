@@ -10,6 +10,3 @@ def register():
         purchase.PurchaseLine,
         move.Move,
         module='purchase_discount', type_='model')
-    Pool.register(
-        purchase.PurchaseDiscountReport,
-        module='purchase_discount', type_='report')

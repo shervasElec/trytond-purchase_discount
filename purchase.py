@@ -5,10 +5,9 @@ from decimal import Decimal
 from trytond.model import fields
 from trytond.pool import PoolMeta
 from trytond.pyson import Eval
-from trytond.modules.purchase.purchase import PurchaseReport
 from trytond.config import config as config_
 
-__all__ = ['PurchaseLine', 'PurchaseDiscountReport']
+__all__ = ['PurchaseLine']
 
 STATES = {
     'invisible': Eval('type') != 'line',
@@ -119,7 +118,3 @@ class PurchaseLine(metaclass=PoolMeta):
             if not vals.get('discount'):
                 vals['discount'] = Decimal(0)
         return super(PurchaseLine, cls).create(vlist)
-
-
-class PurchaseDiscountReport(PurchaseReport):
-    __name__ = 'purchase.purchase.discount'

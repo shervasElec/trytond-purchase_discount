@@ -14,18 +14,5 @@ copyright notices and license terms. -->
                 ref="purchase.purchase_line_view_tree_sequence"/>
             <field name="name">purchase_line_tree</field>
         </record>
-
-        <record model="ir.action.report" id="purchase.report_purchase">
-            <field name="active" eval="False"/>
-        </record>
-        <record model="ir.action.report" id="report_purchase">
-            <field name="name">Purchase</field>
-            <field name="model">purchase.purchase</field>
-            <field name="report_name">purchase.purchase.discount</field>
-            <field name="report">purchase_discount/purchase.odt</field>
-        </record>
-        <record model="ir.action.keyword" id="purchase.report_purchase_keyword">
-            <field name="action" ref="report_purchase"/>
-        </record>
     </data>
 </tryton>
