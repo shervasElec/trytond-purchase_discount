@@ -47,6 +47,8 @@ class PurchaseLine(metaclass=PoolMeta):
     def default_discount():
         return Decimal(0)
 
+    @fields.depends('gross_unit_price', 'discount',
+        methods=['on_change_with_amount'])
     def update_prices(self):
         unit_price = None
         gross_unit_price = gross_unit_price_wo_round = self.gross_unit_price
@@ -66,15 +68,15 @@ class PurchaseLine(metaclass=PoolMeta):
         self.unit_price = unit_price
         self.amount = self.on_change_with_amount()
 
-    @fields.depends('gross_unit_price', 'discount')
+    @fields.depends(methods=['update_prices'])
     def on_change_gross_unit_price(self):
         return self.update_prices()
 
-    @fields.depends('gross_unit_price', 'discount')
+    @fields.depends(methods=['update_prices'])
     def on_change_discount(self):
         return self.update_prices()
 
-    @fields.depends('unit_price', 'discount')
+    @fields.depends('unit_price', 'discount', methods=['update_prices'])
     def on_change_product(self):
         super(PurchaseLine, self).on_change_product()
         self.gross_unit_price = self.unit_price
@@ -84,7 +86,7 @@ class PurchaseLine(metaclass=PoolMeta):
         if self.unit_price:
             self.update_prices()
 
-    @fields.depends('unit_price', 'discount')
+    @fields.depends('unit_price', 'discount', methods=['update_prices'])
     def on_change_quantity(self):
         super(PurchaseLine, self).on_change_quantity()
         self.gross_unit_price = self.unit_price

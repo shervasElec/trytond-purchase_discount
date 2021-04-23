@@ -10,9 +10,9 @@ import io
 from configparser import ConfigParser
 
 MODULE = 'purchase_discount'
-PREFIX = 'trytonspain'
+PREFIX = 'nan-tic'
 MODULE2PREFIX = {
-    'account_invoice_discount': 'trytonspain',
+    'account_invoice_discount': 'nan-tic',
     }
 
 
@@ -56,9 +56,9 @@ if minor_version % 2:
 else:
     branch = series
 dependency_links = [
-    ('hg+https://bitbucket.org/trytonspain/'
+    ('hg+https://bitbucket.org/nan-tic/'
         'trytond-account_invoice_discount@%(branch)s'
-        '#egg=trytonspain-account_invoice_discount-%(series)s' % {
+        '#egg=nan-tic-account_invoice_discount-%(series)s' % {
             'branch': branch,
             'series': series,
             }),
@@ -72,9 +72,9 @@ setup(name='%s_%s' % (PREFIX, MODULE),
     description='Tryton purchase_discount Module',
     long_description=read('README'),
     author='TrytonSpain',
-    author_email='info@trytonspain.com',
-    url='https://bitbucket.org/trytonspain/',
-    download_url="https://bitbucket.org/trytonspain/trytond-%s" % MODULE,
+    author_email='info@nan-tic.com',
+    url='https://bitbucket.org/nan-tic/',
+    download_url="https://bitbucket.org/nan-tic/trytond-%s" % MODULE,
     keywords='',
     package_dir={'trytond.modules.%s' % MODULE: '.'},
     packages=[

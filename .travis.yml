@@ -16,7 +16,7 @@ env:
 notifications:
     irc:
         channels:
-            - "chat.freenode.net#trytonspain-ci"
+            - "chat.freenode.net#nan-tic-ci"
         on_success: change
         on_failure: always
         skip_join: true
