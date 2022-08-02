@@ -14,6 +14,9 @@ PREFIX = 'nan-tic'
 MODULE2PREFIX = {
     'account_invoice_discount': 'nan-tic',
     }
+OWNER = {
+    'nan-tic': 'NaN-tic'
+}
 
 
 def read(fname):
@@ -31,6 +34,27 @@ def get_require_version(name):
         major_version, minor_version + 1)
     return require
 
+def get_requires(depends='depends'):
+  requires = []
+  for dep in info.get(depends, []):
+      if not re.match(r'(ir|res)(\W|$)', dep):
+          prefix = MODULE2PREFIX.get(dep, 'trytond')
+          owner = OWNER.get(prefix, prefix)
+          if prefix == 'trytond':
+              requires.append(get_require_version('%s_%s' % (prefix, dep)))
+          else:
+              requires.append(
+                  '%(prefix)s-%(dep)s@git+https://github.com/%(owner)s/'
+                  'trytond-%(dep)s.git@%(branch)s'
+                  '#egg=%(prefix)s-%(dep)s-%(series)s'%{
+                          'prefix': prefix,
+                          'owner': owner,
+                          'dep':dep,
+                          'branch': branch,
+                          'series': series,})
+
+  return requires
+
 config = ConfigParser()
 config.readfp(open('tryton.cfg'))
 info = dict(config.items('tryton'))
@@ -43,26 +67,22 @@ major_version = int(major_version)
 minor_version = int(minor_version)
 
 requires = []
-for dep in info.get('depends', []):
-    if not re.match(r'(ir|res)(\W|$)', dep):
-        prefix = MODULE2PREFIX.get(dep, 'trytond')
-        requires.append(get_require_version('%s_%s' % (prefix, dep)))
-requires.append(get_require_version('trytond'))
 
-tests_require = [get_require_version('proteus')]
 series = '%s.%s' % (major_version, minor_version)
 if minor_version % 2:
-    branch = 'default'
+    branch = 'master'
 else:
     branch = series
-dependency_links = [
-    ('hg+https://bitbucket.org/nan-tic/'
-        'trytond-account_invoice_discount@%(branch)s'
-        '#egg=nan-tic-account_invoice_discount-%(series)s' % {
-            'branch': branch,
-            'series': series,
-            }),
+
+requires += get_requires('depends')
+
+tests_require = [
+    get_require_version('proteus'),
+
     ]
+tests_require += get_requires('extras_depend')
+
+dependency_links = []
 if minor_version % 2:
     # Add development index for testing with proteus
     dependency_links.append('https://trydevpi.tryton.org/')
@@ -73,8 +93,8 @@ setup(name='%s_%s' % (PREFIX, MODULE),
     long_description=read('README'),
     author='TrytonSpain',
     author_email='info@nan-tic.com',
-    url='https://bitbucket.org/nan-tic/',
-    download_url="https://bitbucket.org/nan-tic/trytond-%s" % MODULE,
+    url='http://www.nan-tic.com/',
+    download_url='https://github.com/NaN-tic/trytond-purchase_discount',
     keywords='',
     package_dir={'trytond.modules.%s' % MODULE: '.'},
     packages=[
@@ -127,8 +147,4 @@ setup(name='%s_%s' % (PREFIX, MODULE),
     test_suite='tests',
     test_loader='trytond.test_loader:Loader',
     tests_require=tests_require,
-    use_2to3=True,
-    convert_2to3_doctests=[
-        'tests/scenario_purchase.rst',
-        ],
     )
