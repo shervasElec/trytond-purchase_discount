@@ -6,6 +6,7 @@ from trytond.model import fields
 from trytond.pool import PoolMeta
 from trytond.pyson import Eval
 from trytond.config import config as config_
+from trytond.modules.product import round_price
 
 __all__ = ['PurchaseLine']
 
@@ -55,14 +56,11 @@ class PurchaseLine(metaclass=PoolMeta):
         gross_unit_price = gross_unit_price_wo_round = self.gross_unit_price
         if self.gross_unit_price is not None and self.discount is not None:
             unit_price = self.gross_unit_price * (1 - self.discount)
-            digits = self.__class__.unit_price.digits[1]
-            unit_price = unit_price.quantize(Decimal(str(10.0 ** -digits)))
+            unit_price = round_price(unit_price)
 
             if self.discount != 1:
                 gross_unit_price_wo_round = unit_price / (1 - self.discount)
-            digits = self.__class__.gross_unit_price.digits[1]
-            gross_unit_price = gross_unit_price_wo_round.quantize(
-                Decimal(str(10.0 ** -digits)))
+            gross_unit_price = round_price(gross_unit_price_wo_round)
 
         self.gross_unit_price = gross_unit_price
         self.gross_unit_price_wo_round = gross_unit_price_wo_round
@@ -114,10 +112,7 @@ class PurchaseLine(metaclass=PoolMeta):
                 or Decimal('0.0'))
             if 'discount' in vals and vals['discount'] != 1:
                 gross_unit_price = gross_unit_price / (1 - vals['discount'])
-                digits = cls.gross_unit_price.digits[1]
-                gross_unit_price = gross_unit_price.quantize(
-                    Decimal(str(10.0 ** -digits)))
-            vals['gross_unit_price'] = gross_unit_price
+            vals['gross_unit_price'] = round_price(gross_unit_price)
             if not vals.get('discount'):
                 vals['discount'] = Decimal(0)
         return super(PurchaseLine, cls).create(vlist)
