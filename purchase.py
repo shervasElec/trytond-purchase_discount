@@ -12,6 +12,7 @@ __all__ = ['PurchaseLine']
 STATES = {
     'invisible': Eval('type') != 'line',
     'required': Eval('type') == 'line',
+    'readonly': Eval('purchase_state') != 'draft',
     }
 DIGITS = config_.getint('product', 'price_decimal', default=4)
 DISCOUNT_DIGITS = config_.getint('product', 'discount_decimal', default=4)
