@@ -12,7 +12,7 @@ from configparser import ConfigParser
 MODULE = 'purchase_discount'
 PREFIX = 'nan-tic'
 MODULE2PREFIX = {
-    'account_invoice_discount': 'nan-tic',
+    'account_invoice_discount': 'trytonspain',
     }
 
 
@@ -56,7 +56,7 @@ if minor_version % 2:
 else:
     branch = series
 dependency_links = [
-    ('hg+https://bitbucket.org/nan-tic/'
+    ('hg+https://bitbucket.org/trytonspain/'
         'trytond-account_invoice_discount@%(branch)s'
         '#egg=nan-tic-account_invoice_discount-%(series)s' % {
             'branch': branch,
