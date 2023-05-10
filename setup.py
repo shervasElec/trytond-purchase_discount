@@ -56,7 +56,7 @@ if minor_version % 2:
 else:
     branch = series
 dependency_links = [
-    ('hg+https://bitbucket.org/trytonspain/'
+    ('hg+https://bitbucket.org/nan-tic/'
         'trytond-account_invoice_discount@%(branch)s'
         '#egg=nan-tic-account_invoice_discount-%(series)s' % {
             'branch': branch,
